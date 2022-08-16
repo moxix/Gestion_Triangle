@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement de ma commande - Triangle{% endblock %}
+
+{% block content %}
+    <h2>Mon récapitulatif</h2>
+    <p>Verfiez vos informations avant de payer votre commande.</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+
+            <strong>Mon adresse de livraison</strong><br>
+
+            <div class="form-check mt-4">
+                {{ delivery|raw }}
+            </div>
+
+
+
+            <hr>
+            <strong>Mon transporteur</strong><br/>
+            <div class="form-check">
+                {{ carrier.name }}<br/>
+                {{ carrier.description }}<br/>
+                {{ carrier.price }} FCFA
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <b>Ma commande</b><br/>
+            </div>
+            <div class="order-sumary">
+                {% set total = null %}
+                {% for key, product in cart %}
+                    <div class="row {% if key > 0 %}mt-2{% endif %}" >
+                        <div class="col-2">
+                            <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="50px">
+                        </div>
+                        <div class="col-8 my-auto">
+                            {{ product.product.name }}<br/>
+                            <small>
+                                {{ product.product.subtitle }}
+                                <br/>
+                                x {{ product.quantity }}
+                            </small>
+                        </div>
+                        <div class="col-2 my-auto">
+                            {{ ((product.product.price * product.quantity)/100) }} FCFA
+                        </div>
+                    </div>
+                    {% set total = total + (product.product.price * product.quantity) %}
+                {% endfor %}
+            </div>
+
+            <hr>
+            <strong> Sous-Total : </strong>{{ (total/100)}} FCFA<br/>
+            <strong> Livraison : </strong>{{ (carrier.price)}} FCFA
+            <hr>
+            <strong>Total : </strong>{{ ((total/100) + carrier.price)}} FCFA
+            <br>
+            <p class="h9"><mark>Payer par T-Money la somme totale de {{ ((total/100) + carrier.price)}} FCFA sur le numero (+228)90XXXXXX.</mark> <br>
+            Nb: Après l'operation envoyé votre preuve de paiement par mail ou par Whatsapp pour que votre commande soit pris en compte. Merci.</p>
+        </div>
+    </div>
+{% endblock %}

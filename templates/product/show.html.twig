@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-5">
+            <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid">
+        </div>
+        <div class="col-md-7 my-auto " >
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.subtitle }}</p>
+            <span class="product-page-price"> {{ (product.price /100) }} FCFA</span>
+            <hr>
+            <P>
+                {{ product.description }}
+            </P>
+            <a href="{{ path('add_to_cart', {'id': product.id }) }}" class="btn btn-primary">Ajouter au panier</a>
+        </div>
+        <hr>
+        <div>
+            <p>Pour personnaliser votre produit veuillez nous contacter sur (contact).</p>
+            <p>NB: Le prix des articles peuvent varier apres personnalisation.Merci.</p>
+        </div>
+    </div>
+    <hr>
+    <h3>Nos meilleurs ventes </h3>
+    <p>Découvrez les articles les plus vendus</p>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-3">
+                {% include 'product/single_product.html.twig' %}
+            </div>
+        {% endfor %}
+    </div><!-- /.row -->
+
+
+
+
+{% endblock %}

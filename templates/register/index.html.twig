@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="block-small" >
+        <h1>Inscription</h1>
+        {% if notification %}
+             <div class="alert alert-info">{{ notification }}</div>
+            <hr>
+        {% endif %}
+
+        {{ form(form) }}
+
+    </div>
+    <hr>
+    <p class="text-center">Ou souhaitez-vous <a href="{{ path('account') }}" >vous connecter a votre compte</a>?</p>
+{% endblock %}
