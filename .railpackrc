@@ -1,0 +1,3 @@
+{
+  "phpExtensions": ["ctype", "iconv", "xml", "intl", "mbstring", "curl", "pdo_mysql", "zip", "dom"]
+}
